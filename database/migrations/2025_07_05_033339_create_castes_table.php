@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('castes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('caste_category_id')->constrained('caste_categories');
+            $table->string('name');
             $table->timestamps();
         });
     }

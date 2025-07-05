@@ -12,23 +12,26 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
+                <!-- <flux:navlist.group :heading="__('Platform')" class="grid"> -->
+                    <flux:navlist.item icon="home"
+                        :href="route('dashboard')"
+                        :current="request()->routeIs('dashboard')"
+                        wire:navigate>
+                        {{ __('विश्लेषण') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="user-group"
+                        :href="route('ward-gender-detail')"
+                        :current="request()->routeIs('ward-gender-detail')"
+                        wire:navigate>
+                        {{ __('टोलगत विवरण') }}
+                    </flux:navlist.item>
+                <!-- </flux:navlist.group> -->
             </flux:navlist>
 
             <flux:spacer />
 
-            <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-                </flux:navlist.item>
-
-                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
-                </flux:navlist.item>
-            </flux:navlist>
-
+            @auth
             <!-- Desktop User Menu -->
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
                 <flux:profile
@@ -73,6 +76,7 @@
                     </form>
                 </flux:menu>
             </flux:dropdown>
+            @endauth
         </flux:sidebar>
 
         <!-- Mobile User Menu -->
@@ -81,6 +85,7 @@
 
             <flux:spacer />
 
+            @auth
             <flux:dropdown position="top" align="end">
                 <flux:profile
                     :initials="auth()->user()->initials()"
@@ -123,6 +128,7 @@
                     </form>
                 </flux:menu>
             </flux:dropdown>
+            @endauth
         </flux:header>
 
         {{ $slot }}

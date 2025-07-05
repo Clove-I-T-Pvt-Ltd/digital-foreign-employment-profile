@@ -1,15 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WardGenderDetailController;
 use Livewire\Volt\Volt;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/', DashboardController::class)->name('dashboard');
+Route::get('/ward-gender-detail', WardGenderDetailController::class)->name('ward-gender-detail');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
